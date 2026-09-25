@@ -14,10 +14,22 @@ config/name="The-Last-Shift"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://bgsmdqvl3ee3h"
+
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://scenes/": "red",
+"res://scripts/": "red"
+}
 
 [physics]
 
