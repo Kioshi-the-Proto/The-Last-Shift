@@ -50,3 +50,7 @@ shape = SubResource("CapsuleShape3D_ayajn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head" unique_id=281320170]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1993081074]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06126213, 0.5523979, -2.1298218)
+use_collision = true
