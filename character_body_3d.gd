@@ -1,8 +1,13 @@
 extends CharacterBody3D
 
+const CROUCH_SPEED = 2
+const SPEED = 4
+const SPRINT_SPEED = 9
+const JUMP_VELOCITY = 4
 
-const SPEED = 10
-const JUMP_VELOCITY = 4.5
+var CROUCH_HEIGHT = 0.5
+var STAND_HEIGHT = 2
+var CROUCHING = false
 
 const SENSITIVITY = 0.005
 @onready var head = $Head #lost my head
@@ -19,15 +24,32 @@ func _physics_process(delta: float) -> void:
 
 #dif movement keys to do stuff
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction = (head.transform.basis*Vector3(input_dir.x,0,input_dir.y))
+#makes the direction fo head to be front
+	var direction = (head.transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		if Input.is_action_pressed("sprint"):
+			velocity.x = direction.x * SPRINT_SPEED
+			velocity.z = direction.z * SPRINT_SPEED 
+		else:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		if CROUCHING:
+			velocity.x = direction.x * CROUCH_SPEED
+			velocity.z = direction.z * CROUCH_SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	#keep this does movement stuff
 	move_and_slide()
+	crouch()
+func crouch():
+	if Input.is_action_just_pressed("crouch"):
+		CROUCHING = !CROUCHING
+		if CROUCHING:
+			$CollisionShape3D.shape.height = CROUCH_HEIGHT
+		else:
+			$CollisionShape3D.shape.height = STAND_HEIGHT
+	
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):
