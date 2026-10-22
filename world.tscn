@@ -30,7 +30,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=533182606]
-transform = Transform3D(20, 0, 0, 0, 0.01, 0, 0, 0, 30, 0, 0, 0)
+transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.007402897)
 use_collision = true
 mesh = SubResource("BoxMesh_ayajn")
 
@@ -51,5 +51,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head" unique_id=281320170]
 
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Head" unique_id=1933597897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001478672, -0.007235348)
+target_position = Vector3(0, 0, -2)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1476298985]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 0, 0.34038353)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 1.9113371, 0.34038353)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=587832097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.067201, 0.52682877, 3.520972)
+use_collision = true
+size = Vector3(4.441284, 1, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=271980068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 1.9113371, 5.954282)
+use_collision = true
+size = Vector3(1, 1, 2.5665283)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=813951714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68264, 1.154257, 9.644848)
+use_collision = true
+size = Vector3(9.333984, 2.5141602, 1)
