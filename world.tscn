@@ -46,6 +46,10 @@ mesh = SubResource("CapsuleMesh_ayajn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0440301, 0)
 shape = SubResource("CapsuleShape3D_ayajn")
 
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=2081495095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0348783, 0)
+target_position = Vector3(0, 1, 0)
+
 [node name="Head" type="Node3D" parent="CharacterBody3D" unique_id=885347531]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
 
