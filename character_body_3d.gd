@@ -12,6 +12,7 @@ var CROUCHING = false
 const SENSITIVITY = 0.005
 @onready var head = $Head #lost my head
 @onready var cam = $Head/Camera3D
+@onready var mesh = $MeshInstance3D
 
 func _physics_process(delta: float) -> void:
 	# Add the down gravity
@@ -46,10 +47,9 @@ func crouch():
 	if Input.is_action_just_pressed("crouch"):
 		CROUCHING = !CROUCHING
 		if CROUCHING:
-			$CollisionShape3D.shape.height = CROUCH_HEIGHT
+			scale = CROUCH_HEIGHT
 		else:
-			$CollisionShape3D.shape.height = STAND_HEIGHT
-	
+			scale = STAND_HEIGHT
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):
@@ -57,5 +57,8 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x*SENSITIVITY)
 		cam.rotate_x(-event.relative.y*SENSITIVITY)
 		cam.rotation.x = clamp(cam.rotation.x,deg_to_rad(-40),deg_to_rad(60	))
+
+	
+
 
 	
