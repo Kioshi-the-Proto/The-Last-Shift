@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b81yusbh3q3d0"]
 
-[ext_resource type="Script" uid="uid://be05aks38c1ow" path="res://character_body_3d.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://cn84lijeb03cr" path="res://Player.tscn" id="1_f3sb7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,10 +16,6 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ayajn"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ayajn"]
-
 [node name="World" type="Node3D" unique_id=2132121762]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986265765]
@@ -34,30 +30,8 @@ transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.0
 use_collision = true
 mesh = SubResource("BoxMesh_ayajn")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1231097398]
+[node name="CharacterBody3D" parent="." unique_id=150960038 instance=ExtResource("1_f3sb7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30214, 0)
-script = ExtResource("1_f3sb7")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1610646023]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0406795, 0)
-mesh = SubResource("CapsuleMesh_ayajn")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1077465334]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0440301, 0)
-shape = SubResource("CapsuleShape3D_ayajn")
-
-[node name="CrouchCheck" type="RayCast3D" parent="CharacterBody3D" unique_id=2081495095]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0348783, 0)
-target_position = Vector3(0, 1, 0)
-
-[node name="Head" type="Node3D" parent="CharacterBody3D" unique_id=885347531]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head" unique_id=281320170]
-
-[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Head" unique_id=1933597897]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001478672, -0.007235348)
-target_position = Vector3(0, 0, -2)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1476298985]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 1.9113371, 0.34038353)
@@ -80,4 +54,4 @@ size = Vector3(9.333984, 2.5141602, 1)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=342558213]
 transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -0.40320623, 1.3915362, 4.899051)
-current = true
+visible = false
