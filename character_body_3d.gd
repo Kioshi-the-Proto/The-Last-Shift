@@ -45,11 +45,7 @@ func _physics_process(delta: float) -> void:
 	crouch()
 func crouch():
 	if Input.is_action_just_pressed("crouch"):
-		CROUCHING = !CROUCHING
-		if CROUCHING:
-			scale = CROUCH_HEIGHT
-		else:
-			scale = STAND_HEIGHT
+		pass
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):
