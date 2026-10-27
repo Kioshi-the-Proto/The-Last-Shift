@@ -8,7 +8,7 @@
 
 [sub_resource type="Animation" id="Animation_kpjcp"]
 resource_name = "CrouchToCrawl"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,7 +39,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_e80uo"]
 resource_name = "StandingToCrawl"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -55,7 +55,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_xhfnw"]
 resource_name = "StandingToCrouch"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,6 +76,13 @@ _data = {
 &"StandingToCrawl": SubResource("Animation_e80uo"),
 &"StandingToCrouch": SubResource("Animation_xhfnw")
 }
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5ksu"]
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_66k2k"]
+radius = 0.4
+height = 1.5
 
 [node name="Player" type="CharacterBody3D" unique_id=150960038]
 script = ExtResource("1_xhfnw")
@@ -105,6 +112,10 @@ target_position = Vector3(0, 0, -2)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1026387006]
 libraries/ = SubResource("AnimationLibrary_kpjcp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1369368007]
+[node name="CrouchingCollisionShape" type="CollisionShape3D" parent="." unique_id=1369368007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7824052, 0)
+shape = SubResource("CapsuleShape3D_a5ksu")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1089460281]
+[node name="CrawlingCollisionShape" type="CollisionShape3D" parent="." unique_id=1089460281]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.44497386, 0.29624277)
+shape = SubResource("CapsuleShape3D_66k2k")
