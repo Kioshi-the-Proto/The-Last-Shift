@@ -34,7 +34,7 @@ mesh = SubResource("BoxMesh_ayajn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30214, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1476298985]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 1.9113371, 0.34038353)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 2.5606232, 0.34038353)
 use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=587832097]
@@ -43,7 +43,7 @@ use_collision = true
 size = Vector3(4.441284, 1, 1)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=271980068]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 1.9113371, 5.954282)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 2.2567675, 5.954282)
 use_collision = true
 size = Vector3(1, 1, 2.5665283)
 
@@ -54,4 +54,4 @@ size = Vector3(9.333984, 2.5141602, 1)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=342558213]
 transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -0.40320623, 1.3915362, 4.899051)
-visible = false
+current = true

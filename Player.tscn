@@ -89,7 +89,6 @@ script = ExtResource("1_xhfnw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1448421946]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0406795, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_ayajn")
 
 [node name="StandingCollisionShape" type="CollisionShape3D" parent="." unique_id=1956812565]
@@ -105,7 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=209903146]
 
-[node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=458662029]
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=458662029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001478672, -0.007235348)
 target_position = Vector3(0, 0, -2)
 
@@ -115,9 +114,7 @@ libraries/ = SubResource("AnimationLibrary_kpjcp")
 [node name="CrouchingCollisionShape" type="CollisionShape3D" parent="." unique_id=1369368007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7824052, 0)
 shape = SubResource("CapsuleShape3D_a5ksu")
-disabled = true
 
 [node name="CrawlingCollisionShape" type="CollisionShape3D" parent="." unique_id=1089460281]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.44497386, 0.29624277)
 shape = SubResource("CapsuleShape3D_66k2k")
-disabled = true
