@@ -63,12 +63,14 @@ func movementStateChange(changeType):
 			else:
 				$AnimationPlayer.play("StandingToCrouch")
 				IS_CROUCHING = true 
-				#change collision to crouching
+				changeCollisionShapeTo("crouching")
 				IS_CRAWLING = false
 		"uncrouch":
 			$AnimationPlayer.play_backwards("StandingToCrouch")
 			IS_CROUCHING = false
 			IS_CRAWLING = false
+			changeCollisionShapeTo("standing")
+			
 			#change collision to standing
 
 		"crawl":
@@ -78,25 +80,32 @@ func movementStateChange(changeType):
 				$AnimationPlayer.play("StandingToCrawl")
 			IS_CROUCHING = false
 			IS_CRAWLING = true
+			changeCollisionShapeTo("crawling")
+			
 			#change collision to crawling
 
 		"uncrawl":
 			$AnimationPlayer.play_backwards("StandingToCrawl")
 			IS_CRAWLING = false
 			IS_CRAWLING = false
+			changeCollisionShapeTo("standing")
+			
 			#change collision to standing
 			
 func changeCollisionShapeTo(shape):
 	match shape:
 		"crouching":
+			print ("shape")
 			$CrouchingCollisionShape.disabled = false
 			$CrawlingCollisionShape.disabled = true
 			$StandingCollisionShape.disabled = true
 		"standing":
+			print ("shape")
 			$StandingCollisionShape.disabled = false
 			$CrawlingCollisionShape.disabled = true
 			$CrouchingCollisionShape.disabled = true
 		"crawling":
+			print ("shape")
 			$CrawlingCollisionShape.disabled = false
 			$StandingCollisionShape.disabled = true
 			$CrouchingCollisionShape.disabled = true
