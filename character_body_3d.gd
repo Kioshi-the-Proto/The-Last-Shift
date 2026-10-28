@@ -23,24 +23,35 @@ func _physics_process(delta: float) -> void:
 	# Handle jumps, hops, or skips
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	
+	if Input.is_action_just_pressed("crouch"):
+		if IS_CROUCHING == false:
+			movementStateChange("crouch")
+			TRUE_SPEED = CROUCH_SPEED
+		elif IS_CROUCHING == true: 
+			movementStateChange("uncrouch")
+			TRUE_SPEED = WALKING_SPEED
+	elif Input.is_action_just_pressed("crawl"):
+		if IS_CRAWLING == false:
+			movementStateChange("crawl")
+			TRUE_SPEED = CRAWL_SPEED
+		elif IS_CRAWLING == true:
+			movementStateChange("uncrawl")
+			TRUE_SPEED = WALKING_SPEED
+			
 #dif movement keys to do stuff
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 #makes the direction fo head to be front
 	var direction = (head.transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	if direction:
 		if Input.is_action_pressed("sprint"):
-			velocity.x = direction.x * SPRINT_SPEED
-			velocity.z = direction.z * SPRINT_SPEED 
-		else:
-			velocity.x = direction.x * WALKING_SPEED
-			velocity.z = direction.z * WALKING_SPEED
-		if IS_CROUCHING:
-			velocity.x = direction.x * CROUCH_SPEED
-			velocity.z = direction.z * CROUCH_SPEED
+			TRUE_SPEED = SPRINT_SPEED
+		velocity.x = direction.x * TRUE_SPEED
+		velocity.z = direction.z * TRUE_SPEED
+	
 	else:
-		velocity.x = move_toward(velocity.x, 0, WALKING_SPEED)
-		velocity.z = move_toward(velocity.z, 0, WALKING_SPEED)
+		velocity.x = move_toward(velocity.x, 0, TRUE_SPEED)
+		velocity.z = move_toward(velocity.z, 0, TRUE_SPEED)
 	#keep this does movement stuff
 	move_and_slide()
 	
@@ -74,6 +85,21 @@ func movementStateChange(changeType):
 			IS_CRAWLING = false
 			IS_CRAWLING = false
 			#change collision to standing
+			
+func changeCollisionShapeTo(shape):
+	match shape:
+		"crouching":
+			$CrouchingCollisionShape.disabled = false
+			$CrawlingCollisionShape.disabled = true
+			$StandingCollisionShape.disabled = true
+		"standing":
+			$StandingCollisionShape.disabled = false
+			$CrawlingCollisionShape.disabled = true
+			$CrouchingCollisionShape.disabled = true
+		"crawling":
+			$CrawlingCollisionShape.disabled = false
+			$StandingCollisionShape.disabled = true
+			$CrouchingCollisionShape.disabled = true
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):
