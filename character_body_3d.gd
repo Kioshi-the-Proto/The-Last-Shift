@@ -3,7 +3,7 @@ extends CharacterBody3D
 const CROUCH_SPEED = 2
 const CRAWL_SPEED = 1
 const WALKING_SPEED = 4
-const SPRINT_SPEED = 9
+const SPRINT_SPEED = 2
 const JUMP_VELOCITY = 4
 
 var TRUE_SPEED = WALKING_SPEED
@@ -45,7 +45,8 @@ func _physics_process(delta: float) -> void:
 	var direction = (head.transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	if direction:
 		if Input.is_action_pressed("sprint"):
-			TRUE_SPEED = SPRINT_SPEED
+			pass
+
 		velocity.x = direction.x * TRUE_SPEED
 		velocity.z = direction.z * TRUE_SPEED
 	
