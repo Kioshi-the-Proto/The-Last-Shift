@@ -14,6 +14,10 @@ const SENSITIVITY = 0.005
 @onready var head = $Head #lost my head
 @onready var cam = $Head/Camera3D
 @onready var mesh = $MeshInstance3D
+@onready var AP = $AnimationPlayer
+@onready var SCS = $StandingCollisionShape
+@onready var CCS = $CrouchingCollisionShape
+@onready var CrawlCS = $CrawlingCollisionShape
 
 func _physics_process(delta: float) -> void:
 	# Add the down gravity
@@ -55,19 +59,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, TRUE_SPEED)
 	#keep this does movement stuff
 	move_and_slide()
-	
 func movementStateChange(changeType):
 	match changeType:
 		"crouch":
 			if IS_CRAWLING:
-				$AnimationPlayer.play_backwards("CrouchToCrawl")
+				AP.play_backwards("CrouchToCrawl")
 			else:
-				$AnimationPlayer.play("StandingToCrouch")
+				AP.play("StandingToCrouch")
 				IS_CROUCHING = true 
 				changeCollisionShapeTo("crouching")
 				IS_CRAWLING = false
 		"uncrouch":
-			$AnimationPlayer.play_backwards("StandingToCrouch")
+			AP.play_backwards("StandingToCrouch")
 			IS_CROUCHING = false
 			IS_CRAWLING = false
 			changeCollisionShapeTo("standing")
@@ -76,9 +79,9 @@ func movementStateChange(changeType):
 
 		"crawl":
 			if IS_CROUCHING:
-				$AnimationPlayer.play("CrouchToCrawl")
+				AP.play("CrouchToCrawl")
 			else:
-				$AnimationPlayer.play("StandingToCrawl")
+				AP.play("StandingToCrawl")
 			IS_CROUCHING = false
 			IS_CRAWLING = true
 			changeCollisionShapeTo("crawling")
@@ -86,7 +89,7 @@ func movementStateChange(changeType):
 			#change collision to crawling
 
 		"uncrawl":
-			$AnimationPlayer.play_backwards("StandingToCrawl")
+			AP.play_backwards("StandingToCrawl")
 			IS_CRAWLING = false
 			IS_CRAWLING = false
 			changeCollisionShapeTo("standing")
@@ -97,19 +100,19 @@ func changeCollisionShapeTo(shape):
 	match shape:
 		"crouching":
 			print ("shape")
-			$CrouchingCollisionShape.disabled = false
-			$CrawlingCollisionShape.disabled = true
-			$StandingCollisionShape.disabled = true
+			CCS.disabled = false
+			CrawlCS.disabled = true
+			SCS.disabled = true
 		"standing":
 			print ("shape")
-			$StandingCollisionShape.disabled = false
-			$CrawlingCollisionShape.disabled = true
-			$CrouchingCollisionShape.disabled = true
+			SCS.disabled = false
+			CrawlCS.disabled = true
+			CCS.disabled = true
 		"crawling":
 			print ("shape")
-			$CrawlingCollisionShape.disabled = false
-			$StandingCollisionShape.disabled = true
-			$CrouchingCollisionShape.disabled = true
+			CrawlCS.disabled = false
+			SCS.disabled = true
+			CCS.disabled = true
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):
