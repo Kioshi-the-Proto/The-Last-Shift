@@ -3,7 +3,7 @@ extends CharacterBody3D
 const CROUCH_SPEED = 2
 const CRAWL_SPEED = 1
 const WALKING_SPEED = 4
-const SPRINT_SPEED = 9
+const SPRINT_SPEED = 2
 const JUMP_VELOCITY = 4
 
 var TRUE_SPEED = WALKING_SPEED
@@ -13,7 +13,11 @@ var IS_CRAWLING = false
 const SENSITIVITY = 0.005
 @onready var head = $Head #lost my head
 @onready var cam = $Head/Camera3D
-@onready var mesh = $MeshInstance3D
+@onready var mesh3D = $MeshInstance3D
+@onready var AP = $AnimationPlayer
+@onready var SCS = $StandingCollisionShape
+@onready var CCS = $CrouchingCollisionShape
+@onready var CrawlCS = $CrawlingCollisionShape
 
 func _physics_process(delta: float) -> void:
 	# Add the down gravity
@@ -45,7 +49,8 @@ func _physics_process(delta: float) -> void:
 	var direction = (head.transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	if direction:
 		if Input.is_action_pressed("sprint"):
-			TRUE_SPEED = SPRINT_SPEED
+			pass #maybe at fucntion later
+
 		velocity.x = direction.x * TRUE_SPEED
 		velocity.z = direction.z * TRUE_SPEED
 	
@@ -54,19 +59,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, TRUE_SPEED)
 	#keep this does movement stuff
 	move_and_slide()
-	
 func movementStateChange(changeType):
 	match changeType:
 		"crouch":
 			if IS_CRAWLING:
-				$AnimationPlayer.play_backwards("CrouchToCrawl")
+				AP.play_backwards("CrouchToCrawl")
 			else:
-				$AnimationPlayer.play("StandingToCrouch")
+				AP.play("StandingToCrouch")
 				IS_CROUCHING = true 
 				changeCollisionShapeTo("crouching")
 				IS_CRAWLING = false
 		"uncrouch":
-			$AnimationPlayer.play_backwards("StandingToCrouch")
+			AP.play_backwards("StandingToCrouch")
 			IS_CROUCHING = false
 			IS_CRAWLING = false
 			changeCollisionShapeTo("standing")
@@ -75,9 +79,9 @@ func movementStateChange(changeType):
 
 		"crawl":
 			if IS_CROUCHING:
-				$AnimationPlayer.play("CrouchToCrawl")
+				AP.play("CrouchToCrawl")
 			else:
-				$AnimationPlayer.play("StandingToCrawl")
+				AP.play("StandingToCrawl")
 			IS_CROUCHING = false
 			IS_CRAWLING = true
 			changeCollisionShapeTo("crawling")
@@ -85,7 +89,7 @@ func movementStateChange(changeType):
 			#change collision to crawling
 
 		"uncrawl":
-			$AnimationPlayer.play_backwards("StandingToCrawl")
+			AP.play_backwards("StandingToCrawl")
 			IS_CRAWLING = false
 			IS_CRAWLING = false
 			changeCollisionShapeTo("standing")
@@ -95,20 +99,26 @@ func movementStateChange(changeType):
 func changeCollisionShapeTo(shape):
 	match shape:
 		"crouching":
-			print ("shape")
-			$CrouchingCollisionShape.disabled = false
-			$CrawlingCollisionShape.disabled = true
-			$StandingCollisionShape.disabled = true
+			
+			CCS.disabled = false
+			CrawlCS.disabled = true
+			SCS.disabled = true
+			mesh3D.mesh.height = CCS.shape.height
+			mesh3D.position.y = 0.787
 		"standing":
-			print ("shape")
-			$StandingCollisionShape.disabled = false
-			$CrawlingCollisionShape.disabled = true
-			$CrouchingCollisionShape.disabled = true
+			
+			SCS.disabled = false
+			CrawlCS.disabled = true
+			CCS.disabled = true
+			mesh3D.mesh.height = SCS.shape.height
+			mesh3D.position.y = 1.044
 		"crawling":
-			print ("shape")
-			$CrawlingCollisionShape.disabled = false
-			$StandingCollisionShape.disabled = true
-			$CrouchingCollisionShape.disabled = true
+			
+			CrawlCS.disabled = false
+			SCS.disabled = true
+			CCS.disabled = true
+			mesh3D.mesh.height = CrawlCS.shape.height
+			mesh3D.position.y = 0.548
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):

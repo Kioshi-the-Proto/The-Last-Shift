@@ -53,5 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68264, 1.154257, 9.644848)
 use_collision = true
 size = Vector3(9.333984, 2.5141602, 1)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=342558213]
-transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -0.40320623, 1.3915362, 4.899051)
+[node name="Dev Cam Turn Off" type="Camera3D" parent="." unique_id=342558213]
+transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -1.8889393, 1.7632781, 1.8608861)
+current = true
+near = 0.005
