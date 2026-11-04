@@ -18,7 +18,7 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1h0va"]
-size = Vector3(41.59857, 0.2644043, 11.08374)
+size = Vector3(41.59857, 0.56274414, 11.08374)
 
 [node name="World" type="Node3D" unique_id=2132121762]
 
