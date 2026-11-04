@@ -17,6 +17,9 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1h0va"]
+size = Vector3(41.59857, 1, 11.08374)
+
 [node name="World" type="Node3D" unique_id=2132121762]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986265765]
@@ -27,12 +30,12 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=533182606]
-transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.007402897)
+transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.47770166)
 use_collision = true
 mesh = SubResource("BoxMesh_ayajn")
 
 [node name="CharacterBody3D" parent="." unique_id=150960038 instance=ExtResource("1_f3sb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30214, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.970016, 114.144165)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1476298985]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 2.5088944, -0.9420872)
@@ -58,5 +61,11 @@ size = Vector3(9.333984, 2.5141602, 1)
 transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -1.8889393, 1.7632781, 1.8608861)
 near = 0.005
 
-[node name="blockbench_export" parent="." unique_id=1411456960 instance=ExtResource("2_fj7yv")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -3.37883, 0, 119.6519)
+[node name="Area3D" type="Area3D" parent="." unique_id=1382705705]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -5.1981354, 0, 111.81804)
+
+[node name="blockbench_export" parent="Area3D" unique_id=1411456960 instance=ExtResource("2_fj7yv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36386108, 0, 1.5667725)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2122682242]
+shape = SubResource("BoxShape3D_1h0va")
