@@ -18,7 +18,7 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1h0va"]
-size = Vector3(41.59857, 2.1049805, 11.08374)
+size = Vector3(41.59857, 0.2644043, 11.08374)
 
 [node name="World" type="Node3D" unique_id=2132121762]
 
@@ -64,7 +64,7 @@ near = 0.005
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2102102531]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2122682242]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -5.1981354, 2.7624512, 111.81804)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -5.1981354, -1.8389893, 111.81804)
 shape = SubResource("BoxShape3D_1h0va")
 
 [node name="blockbench_export" parent="StaticBody3D" unique_id=1411456960 instance=ExtResource("2_fj7yv")]
