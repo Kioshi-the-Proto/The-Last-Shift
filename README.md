@@ -1,6 +1,4 @@
 # The-Last-Shift
-# this file is cool because there is nothing in it
-# I love how nothing is in this
 
 # this project was created with the combined efforts of all year 2 students in Tom Rodger's 2nd hour CTE App Design class 2026, as well as various search engines and superficial means. 
 
