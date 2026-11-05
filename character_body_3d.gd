@@ -1,17 +1,18 @@
 extends CharacterBody3D
 
+#speed and jump vars
 const CROUCH_SPEED = 2
 const CRAWL_SPEED = 1
 const WALKING_SPEED = 4
 const SPRINT_SPEED = 2
 const JUMP_VELOCITY = 4
-
+#true speed is set so we can change it
 var TRUE_SPEED = WALKING_SPEED
 var IS_CROUCHING = false
 var IS_CRAWLING = false
 
 const SENSITIVITY = 0.005
-@onready var head = $Head #lost my head
+@onready var head = $Head 
 @onready var cam = $Head/Camera3D
 @onready var mesh3D = $MeshInstance3D
 @onready var AP = $AnimationPlayer
@@ -24,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jumps, hops, or skips
+	# Handle jumps, hops, or skips (why did I say this)
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
@@ -45,8 +46,8 @@ func _physics_process(delta: float) -> void:
 			
 #dif movement keys to do stuff
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-#makes the direction fo head to be front
-	var direction = (head.transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
+#makes the direction of head to be front
+	var direction = (transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	if direction:
 		if Input.is_action_pressed("sprint"):
 			pass #maybe at fucntion later
