@@ -1,34 +1,126 @@
 extends CharacterBody3D
 
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+#speed and jump vars
+const CROUCH_SPEED = 2
+const CRAWL_SPEED = 1
+const WALKING_SPEED = 4
+const SPRINT_SPEED = 2
+const JUMP_VELOCITY = 4
+#true speed is set so we can change it
+var TRUE_SPEED = WALKING_SPEED
+var IS_CROUCHING = false
+var IS_CRAWLING = false
 
 const SENSITIVITY = 0.005
-@onready var head = $Head
+@onready var head = $Head 
 @onready var cam = $Head/Camera3D
+@onready var mesh3D = $MeshInstance3D
+@onready var AP = $AnimationPlayer
+@onready var SCS = $StandingCollisionShape
+@onready var CCS = $CrouchingCollisionShape
+@onready var CrawlCS = $CrawlingCollisionShape
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Add the down gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	# Handle jumps, hops, or skips (why did I say this)
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
+	if Input.is_action_just_pressed("crouch"):
+		if IS_CROUCHING == false:
+			movementStateChange("crouch")
+			TRUE_SPEED = CROUCH_SPEED
+		elif IS_CROUCHING == true: 
+			movementStateChange("uncrouch")
+			TRUE_SPEED = WALKING_SPEED
+	elif Input.is_action_just_pressed("crawl"):
+		if IS_CRAWLING == false:
+			movementStateChange("crawl")
+			TRUE_SPEED = CRAWL_SPEED
+		elif IS_CRAWLING == true:
+			movementStateChange("uncrawl")
+			TRUE_SPEED = WALKING_SPEED
+			
+#dif movement keys to do stuff
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction = (head.transfrom.basic*Vector3(input_dir.x,0,input_dir.y))
+#makes the direction of head to be front
+	var direction = (transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if Input.is_action_pressed("sprint"):
+			pass #maybe at fucntion later
 
-func _ready():
+		velocity.x = direction.x * TRUE_SPEED
+		velocity.z = direction.z * TRUE_SPEED
+	
+	else:
+		velocity.x = move_toward(velocity.x, 0, TRUE_SPEED)
+		velocity.z = move_toward(velocity.z, 0, TRUE_SPEED)
+	#keep this does movement stuff
+	move_and_slide()
+func movementStateChange(changeType):
+	match changeType:
+		"crouch":
+			if IS_CRAWLING:
+				AP.play_backwards("CrouchToCrawl")
+			else:
+				AP.play("StandingToCrouch")
+				IS_CROUCHING = true 
+				changeCollisionShapeTo("crouching")
+				IS_CRAWLING = false
+		"uncrouch":
+			AP.play_backwards("StandingToCrouch")
+			IS_CROUCHING = false
+			IS_CRAWLING = false
+			changeCollisionShapeTo("standing")
+			
+			#change collision to standing
+
+		"crawl":
+			if IS_CROUCHING:
+				AP.play("CrouchToCrawl")
+			else:
+				AP.play("StandingToCrawl")
+			IS_CROUCHING = false
+			IS_CRAWLING = true
+			changeCollisionShapeTo("crawling")
+			
+			#change collision to crawling
+
+		"uncrawl":
+			AP.play_backwards("StandingToCrawl")
+			IS_CRAWLING = false
+			IS_CRAWLING = false
+			changeCollisionShapeTo("standing")
+			
+			#change collision to standing
+			
+func changeCollisionShapeTo(shape):
+	match shape:
+		"crouching":
+			
+			CCS.disabled = false
+			CrawlCS.disabled = true
+			SCS.disabled = true
+			mesh3D.mesh.height = CCS.shape.height
+			mesh3D.position.y = 0.787
+		"standing":
+			
+			SCS.disabled = false
+			CrawlCS.disabled = true
+			CCS.disabled = true
+			mesh3D.mesh.height = SCS.shape.height
+			mesh3D.position.y = 1.044
+		"crawling":
+			
+			CrawlCS.disabled = false
+			SCS.disabled = true
+			CCS.disabled = true
+			mesh3D.mesh.height = CrawlCS.shape.height
+			mesh3D.position.y = 0.548
+func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _unhandled_input(event):
 	if event is InputEventMouse:
@@ -36,4 +128,7 @@ func _unhandled_input(event):
 		cam.rotate_x(-event.relative.y*SENSITIVITY)
 		cam.rotation.x = clamp(cam.rotation.x,deg_to_rad(-40),deg_to_rad(60	))
 
-	move_and_slide()
+	
+
+
+	

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b81yusbh3q3d0"]
 
-[ext_resource type="Script" uid="uid://be05aks38c1ow" path="res://character_body_3d.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://cn84lijeb03cr" path="res://Player.tscn" id="1_f3sb7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,10 +16,6 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ayajn"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ayajn"]
-
 [node name="World" type="Node3D" unique_id=2132121762]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986265765]
@@ -30,23 +26,33 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=533182606]
-transform = Transform3D(10, 0, 0, 0, 0.01, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.007402897)
 use_collision = true
 mesh = SubResource("BoxMesh_ayajn")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1231097398]
+[node name="CharacterBody3D" parent="." unique_id=150960038 instance=ExtResource("1_f3sb7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30214, 0)
-script = ExtResource("1_f3sb7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1610646023]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0406795, 0)
-mesh = SubResource("CapsuleMesh_ayajn")
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1476298985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 2.5088944, -0.9420872)
+use_collision = true
+size = Vector3(1, 1.9487305, 3.5649414)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1077465334]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43, 0)
-shape = SubResource("CapsuleShape3D_ayajn")
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=587832097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.067201, 0.52682877, 3.520972)
+use_collision = true
+size = Vector3(4.441284, 1, 1)
 
-[node name="Head" type="Node3D" parent="CharacterBody3D" unique_id=885347531]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=271980068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 2.3335674, 5.954282)
+use_collision = true
+size = Vector3(1, 1, 2.5665283)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head" unique_id=281320170]
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=813951714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68264, 1.154257, 9.644848)
+use_collision = true
+size = Vector3(9.333984, 2.5141602, 1)
+
+[node name="Dev Cam Turn Off" type="Camera3D" parent="." unique_id=342558213]
+transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -1.8889393, 1.7632781, 1.8608861)
+near = 0.005
