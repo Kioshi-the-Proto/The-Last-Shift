@@ -11,6 +11,7 @@ var TRUE_SPEED = WALKING_SPEED
 var IS_CROUCHING = false
 var IS_CRAWLING = false
 
+#dont touch this, I don't touch this idk what this is
 const SENSITIVITY = 0.005
 @onready var head = $Head 
 @onready var cam = $Head/Camera3D
@@ -61,6 +62,7 @@ func _physics_process(delta: float) -> void:
 	#keep this does movement stuff
 	move_and_slide()
 func movementStateChange(changeType):
+	#the ap is for changing cam position and collision
 	match changeType:
 		"crouch":
 			if IS_CRAWLING:
@@ -98,14 +100,14 @@ func movementStateChange(changeType):
 			#change collision to standing
 			
 func changeCollisionShapeTo(shape):
-	match shape:
+	match shape: #CCS is crouch collision shape ect ect
 		"crouching":
 			
 			CCS.disabled = false
 			CrawlCS.disabled = true
 			SCS.disabled = true
 			mesh3D.mesh.height = CCS.shape.height
-			mesh3D.position.y = 0.787
+			mesh3D.position.y = 0.787 #pls dont touch these everything breaks
 		"standing":
 			
 			SCS.disabled = false
