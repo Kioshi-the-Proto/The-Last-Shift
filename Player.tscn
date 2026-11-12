@@ -103,10 +103,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=209903146]
 
-[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=458662029]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001478672, -0.007235348)
-target_position = Vector3(0, 0, -2)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1026387006]
 libraries/ = SubResource("AnimationLibrary_kpjcp")
 
