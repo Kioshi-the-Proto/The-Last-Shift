@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0k0sqinyjegd"
-path.s3tc="res://.godot/imported/floor_tiles_try_it_0.png-1a7ce222d6e18d34629b6fe0d4435434.s3tc.ctex"
+path.s3tc="res://.godot/imported/floor_tiles_try_it_0.png-625b2177350a1ca77f622cd0d13e2bc4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/floor_tiles/floor_tiles_try_it_0.png"
-dest_files=["res://.godot/imported/floor_tiles_try_it_0.png-1a7ce222d6e18d34629b6fe0d4435434.s3tc.ctex"]
+source_file="res://assets/models/floor_tiles/floor_tiles_try_it_0.png"
+dest_files=["res://.godot/imported/floor_tiles_try_it_0.png-625b2177350a1ca77f622cd0d13e2bc4.s3tc.ctex"]
 
 [params]
 

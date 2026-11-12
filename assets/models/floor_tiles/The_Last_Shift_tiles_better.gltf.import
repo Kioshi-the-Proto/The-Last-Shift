@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b8deft7vt70xw"
-path="res://.godot/imported/The_Last_Shift_tiles_better.gltf-55be46a0e4671d11886f639af92678de.scn"
+path="res://.godot/imported/The_Last_Shift_tiles_better.gltf-c2b839a10777f4cfa6ed35a1cdc47f3e.scn"
 
 [deps]
 
-source_file="res://assets/floor_tiles/The_Last_Shift_tiles_better.gltf"
-dest_files=["res://.godot/imported/The_Last_Shift_tiles_better.gltf-55be46a0e4671d11886f639af92678de.scn"]
+source_file="res://assets/models/floor_tiles/The_Last_Shift_tiles_better.gltf"
+dest_files=["res://.godot/imported/The_Last_Shift_tiles_better.gltf-c2b839a10777f4cfa6ed35a1cdc47f3e.scn"]
 
 [params]
 
