@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://cmhypbc5ttpyp"]
+
+[ext_resource type="Texture2D" uid="uid://cc3lavnwthkj5" path="res://Untitledr.png" id="1_ng6rs"]
+[ext_resource type="Script" uid="uid://bx6tgvv06rjv7" path="res://sprite_3d.gd" id="2_ms44d"]
+[ext_resource type="Texture2D" uid="uid://cwru82o3dmvl8" path="res://Untitledr_talk.png" id="3_hmgt8"]
+
+[sub_resource type="Animation" id="Animation_dwbse"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ng6rs")]
+}
+
+[sub_resource type="Animation" id="Animation_pkg7o"]
+resource_name = "no_talk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ng6rs")]
+}
+
+[sub_resource type="Animation" id="Animation_gbfbk"]
+resource_name = "talk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_hmgt8")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioo17"]
+_data = {
+&"RESET": SubResource("Animation_dwbse"),
+&"no_talk": SubResource("Animation_pkg7o"),
+&"talk": SubResource("Animation_gbfbk")
+}
+
+[node name="Regdor" type="Sprite3D" unique_id=1006942703]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 2
+texture = ExtResource("1_ng6rs")
+script = ExtResource("2_ms44d")
+
+[node name="Talk_Timer" type="Timer" parent="." unique_id=666245509]
+wait_time = 0.3
+one_shot = true
+
+[node name="No_Talk_Timer" type="Timer" parent="." unique_id=886543501]
+wait_time = 0.3
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1167810887]
+libraries/ = SubResource("AnimationLibrary_ioo17")
+
+[connection signal="timeout" from="Talk_Timer" to="." method="_on_talk_timer_timeout"]
+[connection signal="timeout" from="No_Talk_Timer" to="." method="_on_no_talk_timer_timeout"]

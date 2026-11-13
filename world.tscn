@@ -3,83 +3,32 @@
 [ext_resource type="PackedScene" uid="uid://cn84lijeb03cr" path="res://Player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://47admg8637rk" path="res://assets/models/floor_tiles/floor_tiles_try_it.gltf" id="2_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://cc3lavnwthkj5" path="res://Untitledr.png" id="3_tlwt5"]
-[ext_resource type="Script" uid="uid://bx6tgvv06rjv7" path="res://sprite_3d.gd" id="4_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://cwru82o3dmvl8" path="res://Untitledr_talk.png" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://cmhypbc5ttpyp" path="res://scenes/regdor.tscn" id="4_aqk2v"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s5wwg"]
+panorama = ExtResource("3_tlwt5")
 
-[sub_resource type="Sky" id="Sky_fj7yv"]
-sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+[sub_resource type="Sky" id="Sky_4bxd4"]
+sky_material = SubResource("PanoramaSkyMaterial_s5wwg")
 
-[sub_resource type="Environment" id="Environment_tlwt5"]
+[sub_resource type="Environment" id="Environment_0e8jo"]
 background_mode = 2
-sky = SubResource("Sky_fj7yv")
-glow_enabled = true
+background_energy_multiplier = 0.18
+sky = SubResource("Sky_4bxd4")
+ambient_light_source = 3
+ambient_light_energy = 2.15
+glow_intensity = 0.06
+glow_bloom = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
-
-[sub_resource type="Animation" id="Animation_dwbse"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_tlwt5")]
-}
-
-[sub_resource type="Animation" id="Animation_pkg7o"]
-resource_name = "no_talk"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_tlwt5")]
-}
-
-[sub_resource type="Animation" id="Animation_gbfbk"]
-resource_name = "talk"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_036b0")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioo17"]
-_data = {
-&"RESET": SubResource("Animation_dwbse"),
-&"no_talk": SubResource("Animation_pkg7o"),
-&"talk": SubResource("Animation_gbfbk")
-}
 
 [node name="World" type="Node3D" unique_id=2132121762]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986265765]
-environment = SubResource("Environment_tlwt5")
+environment = SubResource("Environment_0e8jo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=222108302]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=533182606]
 transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.47770166)
@@ -119,22 +68,5 @@ visible = false
 [node name="blockbench_export" parent="StaticBody3D" unique_id=1411456960 instance=ExtResource("2_fj7yv")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -3.37883, 0, 119.6519)
 
-[node name="Regdor" type="Sprite3D" parent="." unique_id=778637043]
+[node name="Regdor" parent="." unique_id=1006942703 instance=ExtResource("4_aqk2v")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9.339979, 2.3405106, -2.02896)
-billboard = 2
-texture = ExtResource("3_tlwt5")
-script = ExtResource("4_aqk2v")
-
-[node name="Talk_Timer" type="Timer" parent="Regdor" unique_id=1607483789]
-wait_time = 0.3
-one_shot = true
-
-[node name="No_Talk_Timer" type="Timer" parent="Regdor" unique_id=1612078007]
-wait_time = 0.3
-one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Regdor" unique_id=1598318607]
-libraries/ = SubResource("AnimationLibrary_ioo17")
-
-[connection signal="timeout" from="Regdor/Talk_Timer" to="Regdor" method="_on_talk_timer_timeout"]
-[connection signal="timeout" from="Regdor/No_Talk_Timer" to="Regdor" method="_on_no_talk_timer_timeout"]

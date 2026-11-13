@@ -122,6 +122,7 @@ func changeCollisionShapeTo(shape):
 			mesh3D.position.y = 0.548
 func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	GameManager.player = self
 func _unhandled_input(event):
 	if event is InputEventMouse:
 		head.rotate_y(-event.relative.x*SENSITIVITY)

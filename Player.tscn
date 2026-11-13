@@ -103,6 +103,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5066617, -0.48976204)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=209903146]
 
+[node name="AreaLight3D" type="AreaLight3D" parent="Head" unique_id=1746799757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00033831596, -0.00023797154)
+visible = false
+light_energy = 16.0
+shadow_enabled = true
+area_range = 39.185
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1026387006]
 libraries/ = SubResource("AnimationLibrary_kpjcp")
 

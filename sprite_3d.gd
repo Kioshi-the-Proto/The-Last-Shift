@@ -17,6 +17,10 @@ func _process(delta: float) -> void:
 		AP.play("talk")
 	else:
 		AP.play("no_talk")
+	
+	#makes regdor always look at player.
+	if GameManager.player:
+		look_at(GameManager.player.position)
 
 
 func _on_talk_timer_timeout() -> void:
