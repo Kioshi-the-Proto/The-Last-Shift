@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cc3lavnwthkj5" path="res://Untitledr.png" id="1_ng6rs"]
 [ext_resource type="Script" uid="uid://bx6tgvv06rjv7" path="res://sprite_3d.gd" id="2_ms44d"]
 [ext_resource type="Texture2D" uid="uid://cwru82o3dmvl8" path="res://Untitledr_talk.png" id="3_hmgt8"]
+[ext_resource type="Script" uid="uid://bhdspwerxhc1e" path="res://scripts/rot.gd" id="4_ms44d"]
 
 [sub_resource type="Animation" id="Animation_dwbse"]
 length = 0.001
@@ -72,6 +73,9 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1167810887]
 libraries/ = SubResource("AnimationLibrary_ioo17")
+
+[node name="rot" type="Node3D" parent="." unique_id=1052143802]
+script = ExtResource("4_ms44d")
 
 [connection signal="timeout" from="Talk_Timer" to="." method="_on_talk_timer_timeout"]
 [connection signal="timeout" from="No_Talk_Timer" to="." method="_on_no_talk_timer_timeout"]

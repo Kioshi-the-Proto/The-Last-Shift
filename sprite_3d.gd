@@ -5,6 +5,7 @@ extends Sprite3D
 @onready var timer1 = $Talk_Timer
 @onready var timer2 = $No_Talk_Timer
 @onready var AP = $AnimationPlayer
+@onready var rot: Node3D = $rot
 var talking = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,9 +19,12 @@ func _process(delta: float) -> void:
 	else:
 		AP.play("no_talk")
 	
-	#makes regdor always look at player.
-	if GameManager.player:
-		look_at(GameManager.player.position)
+	#make regdor look at u
+	global_rotation.y = rot.global_rotation.y
+	
+	#make regdor move
+	position = lerp(global_position, GameManager.player.global_position, 1)
+	
 
 
 func _on_talk_timer_timeout() -> void:

@@ -70,3 +70,4 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -3.37883, 0, 119.6519)
 
 [node name="Regdor" parent="." unique_id=1006942703 instance=ExtResource("4_aqk2v")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9.339979, 2.3405106, -2.02896)
+billboard = 0
