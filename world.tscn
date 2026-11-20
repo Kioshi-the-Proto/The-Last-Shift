@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://b81yusbh3q3d0"]
 
-[ext_resource type="Environment" uid="uid://cqdw4yijbb3gl" path="res://assets/materials/night_time.tres" id="1_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://cn84lijeb03cr" path="res://Player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://47admg8637rk" path="res://assets/models/floor_tiles/floor_tiles_try_it.gltf" id="2_fj7yv"]
 [ext_resource type="Script" uid="uid://b51s3vtq1axyk" path="res://csg_box_3d.gd" id="3_036b0"]
@@ -8,10 +7,21 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_np86c"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ehm3w"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbp6r"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_ehm3w")
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_np86c"]
+file = "res://assets/music/HjHuKNmTRTpWmHwG.ogv"
+
 [node name="World" type="Node3D" unique_id=2132121762]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986265765]
-environment = ExtResource("1_aqk2v")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=222108302]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -46,9 +56,9 @@ use_collision = true
 size = Vector3(1, 1, 2.5665283)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=813951714]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68264, 1.154257, 9.644848)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68264, 1.6829436, 9.644848)
 use_collision = true
-size = Vector3(9.333984, 2.5141602, 1)
+size = Vector3(9.333984, 3.5715332, 1)
 
 [node name="Dev Cam Turn Off" type="Camera3D" parent="." unique_id=342558213]
 transform = Transform3D(0.10620608, 0, -0.9943441, 0, 1, 0, 0.9943441, 0, 0.10620608, -1.8889393, 1.7632781, 1.8608861)
@@ -63,5 +73,27 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -3.37883, 0, 119.6519)
 [node name="Regdor" parent="." unique_id=1006942703 instance=ExtResource("4_aqk2v")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9.339979, 2.3405106, -2.02896)
 billboard = 0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=975318281]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TV" type="MeshInstance3D" parent="." unique_id=867213479]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1.777, 0, 1, -7.767513e-08, -1.6077623, 2.4694836, -0.58811665)
+mesh = SubResource("PlaneMesh_np86c")
+surface_material_override/0 = SubResource("StandardMaterial3D_gbp6r")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1225807918]
+size = Vector2i(480, 360)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewport" unique_id=1102926047]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport/SubViewportContainer" unique_id=840165243]
+layout_mode = 2
+stream = SubResource("VideoStreamTheora_np86c")
+autoplay = true
+loop = true
 
 [connection signal="timeout" from="CSGBox3D/Timer" to="CSGBox3D" method="_on_timer_timeout"]
