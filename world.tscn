@@ -1,31 +1,16 @@
 [gd_scene format=3 uid="uid://b81yusbh3q3d0"]
 
-[ext_resource type="Texture2D" uid="uid://db0s047ylyh5d" path="res://Regdor The Mighty.png" id="1_aqk2v"]
+[ext_resource type="Environment" uid="uid://cqdw4yijbb3gl" path="res://assets/materials/night_time.tres" id="1_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://cn84lijeb03cr" path="res://Player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://47admg8637rk" path="res://assets/models/floor_tiles/floor_tiles_try_it.gltf" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://cmhypbc5ttpyp" path="res://scenes/regdor.tscn" id="4_aqk2v"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s5wwg"]
-panorama = ExtResource("1_aqk2v")
-
-[sub_resource type="Sky" id="Sky_4bxd4"]
-sky_material = SubResource("PanoramaSkyMaterial_s5wwg")
-
-[sub_resource type="Environment" id="Environment_0e8jo"]
-background_mode = 2
-background_energy_multiplier = 0.18
-sky = SubResource("Sky_4bxd4")
-ambient_light_source = 3
-ambient_light_energy = 2.15
-glow_intensity = 0.06
-glow_bloom = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_ayajn"]
 
 [node name="World" type="Node3D" unique_id=2132121762]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=986265765]
-environment = SubResource("Environment_0e8jo")
+environment = ExtResource("1_aqk2v")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=222108302]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)

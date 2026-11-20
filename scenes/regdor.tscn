@@ -57,6 +57,9 @@ _data = {
 &"talk": SubResource("Animation_gbfbk")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_np86c"]
+radius = 17.275484
+
 [node name="Regdor" type="Sprite3D" unique_id=1006942703]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 2
@@ -76,6 +79,18 @@ libraries/ = SubResource("AnimationLibrary_ioo17")
 
 [node name="rot" type="Node3D" parent="." unique_id=1052143802]
 script = ExtResource("4_ms44d")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1173656233]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.72857094, 0)
+light_energy = 16.0
+light_indirect_energy = 2.901
+light_size = 1.0
+area_range = 23.845
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1414548244]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2065542067]
+shape = SubResource("SphereShape3D_np86c")
 
 [connection signal="timeout" from="Talk_Timer" to="." method="_on_talk_timer_timeout"]
 [connection signal="timeout" from="No_Talk_Timer" to="." method="_on_no_talk_timer_timeout"]
