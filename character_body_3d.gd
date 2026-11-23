@@ -124,7 +124,7 @@ func _ready(): #THIS STUFF DOES THE CAMREA DO NOT TOUCH!
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	GameManager.player = self
 func _unhandled_input(event):
-	if event is InputEventMouse:
+	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x*SENSITIVITY)
 		cam.rotate_x(-event.relative.y*SENSITIVITY)
 		cam.rotation.x = clamp(cam.rotation.x,deg_to_rad(-40),deg_to_rad(60	))
