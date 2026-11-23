@@ -31,9 +31,6 @@ transform = Transform3D(200, 0, 0, 0, 0.01, 0, 0, 0, 200, -0.0035538673, 0, -0.4
 use_collision = true
 mesh = SubResource("BoxMesh_ayajn")
 
-[node name="CharacterBody3D" parent="." unique_id=150960038 instance=ExtResource("1_f3sb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7312775, 0.8907547, 1.8131332)
-
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1476298985]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3465586, 2.5088944, -0.9420872)
 use_collision = true
@@ -95,5 +92,7 @@ layout_mode = 2
 stream = SubResource("VideoStreamTheora_np86c")
 autoplay = true
 loop = true
+
+[node name="Player" parent="." unique_id=150960038 instance=ExtResource("1_f3sb7")]
 
 [connection signal="timeout" from="CSGBox3D/Timer" to="CSGBox3D" method="_on_timer_timeout"]
